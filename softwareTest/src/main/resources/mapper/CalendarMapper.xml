@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.softwaretest.Mapper.CalendarMapper">
+
+    <select id="getTestCases" resultType="Calendar">
+        select id, year, month, day, expectResult,actualResult,pass
+        from softwareTesting.Calendar
+    </select>
+
+    <delete id="cleanTestCases">
+        delete from softwareTesting.Calendar;
+    </delete>
+
+    <insert id="saveTestCases" parameterType="Calendar">
+        insert into softwareTesting.Calendar (year, month, day,expectResult,actualResult,pass)
+        values (#{year},#{month},#{day},#{expectResult},#{actualResult},#{pass})
+    </insert>
+
+    <select id="queryPass" resultType="Double">
+        select count(pass)
+        from softwareTesting.Calendar
+        where pass = 1
+    </select>
+
+    <select id="total" resultType="Double">
+        select count(pass)
+        from softwareTesting.Calendar
+    </select>
+</mapper>
